@@ -1,0 +1,90 @@
+import React from "react";
+import Base from "../core/Base";
+import { isAutheticated } from "../auth/helper";
+import { Link } from "react-router-dom";
+
+const AdminDashboard = () => {
+  const {
+    user: { name, email, role },
+  } = isAutheticated();
+
+  const adminLeftSide = () => {
+    return (
+      <div className="card">
+        <h4 className="card-header bg-dark text-white">Admin Navigation</h4>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link to="/admin/create/category" className="nav-link text-info">
+              Create Categories
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/categories" className="nav-link text-info">
+              Manage Categories
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/create/product" className="nav-link text-info">
+              Create Products
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/products" className="nav-link text-info">
+              Manage Products
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/orders" className="nav-link text-info">
+              Manage Orders
+            </Link>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
+  const adminRightSide = () => {
+    return (
+      <div className="card mb-4">
+        <h4 className="card-header">Admin Info</h4>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <span className="badge badge-info mr-2">Name:</span>
+            <span>{name}</span>
+          </li>
+          <li className="list-group-item">
+            <span className="badge badge-info mr-2">Email:</span>
+            <span>{email}</span>
+          </li>
+          {/* <li className="list-group-item">
+            <span className="badge badge-info mr-2">Id:</span>
+            <span>{id}</span>
+          </li> */}
+          <li className="list-group-item">
+            <span className="badge badge-info mr-2">Role:</span>
+            <span>{role}</span>
+          </li>
+          <li className="list-group-item">
+            <span className="badge badge-danger mr-2">Admin Area</span>
+          </li>
+        </ul>
+      </div>
+    );
+  };
+
+  return (
+    <Base
+      title="Welcome to Admin area"
+      description="Manage All T-shirts here"
+      className="container bg-info p-2"
+    >
+      {/* <h1 className="text-white">Admin Dashboard haeding</h1> */}
+      <div className="row py-1">
+        <div className="col-3">{adminLeftSide()}</div>
+        <div className="col-9">{adminRightSide()}</div>
+      </div>
+    </Base>
+  );
+};
+
+export default AdminDashboard;
